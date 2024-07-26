@@ -36,6 +36,9 @@ namespace N {
 
         // Override TakeDamage method
         void TakeDamage(int damage) override;
+
+        // Use a skill
+        void UseSkill(const std::string& skill, Player& target) override;
     };
 
 }

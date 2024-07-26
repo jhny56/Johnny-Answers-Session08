@@ -43,4 +43,20 @@ namespace N {
         }
     }
 
+    // Use a skill
+    void Mage::UseSkill(const std::string& skill, Player& target) {
+        if (Skills.find(skill) != Skills.end() && Skills[skill].second == "Mana") {
+            int damage = Skills[skill].first;
+            if (Mana >= damage) {
+                DecreaseMana(damage);
+                std::cout << Name << " used " << skill << " on " << target.getName() << " for " << damage << " damage, Mana left: " << Mana << std::endl;
+                target.TakeDamage(damage);
+            } else {
+                std::cout << "Not enough Mana to use " << skill << std::endl;
+            }
+        } else {
+            std::cout << "Skill not found or incorrect resource type" << std::endl;
+        }
+    }
+
 }

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <map>
 
 namespace N {
 
@@ -13,7 +13,7 @@ namespace N {
             std::string Name;
             std::string Race;
             int Health = 100;
-            std::list<std::string> Skills;
+             std::map<std::string, std::pair<int, std::string>> Skills;
             bool Alive = true;
 
         public:
@@ -30,7 +30,10 @@ namespace N {
             virtual void GetInfo() const;
 
             // Acquire a new skill
-            void AcquireSkill(const std::string& skill);
+           void AcquireSkill(const std::string& skill, int damage, const std::string& resourceType);
+
+            // Use a skill
+            virtual void UseSkill(const std::string& skill, Player& target) = 0;
 
             // Pure virtual function to take damage
             virtual void TakeDamage(int damage) = 0;
@@ -51,7 +54,7 @@ namespace N {
             bool getAlive() const;
 
             // Getter for Skills
-            std::list<std::string> getSkills() const;
+            std::map<std::string, std::pair<int, std::string>> getSkills() const;
     };
 
 }

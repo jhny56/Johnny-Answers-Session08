@@ -1,5 +1,6 @@
 #include "player.h"
 
+
 namespace N {
 
     // Default constructor
@@ -16,14 +17,14 @@ namespace N {
         std::cout << "Alive : " << std::boolalpha << Alive << std::endl;
 
         std::cout << "Skills : " << std::endl;
-        for (const std::string& skill : Skills) {
-            std::cout << "   " << skill << std::endl;
+        for (const auto& skill : Skills) {
+            std::cout << "   " << skill.first << " (Damage: " << skill.second.first << ", Resource: " << skill.second.second << ")" << std::endl;
         }
     }
 
     // Acquire a new skill
-    void Player::AcquireSkill(const std::string& skill) {
-        Skills.push_back(skill);
+    void Player::AcquireSkill(const std::string& skill, int damage, const std::string& resourceType) {
+        Skills[skill] = std::make_pair(damage, resourceType);
     }
 
     // Getter for Name
@@ -39,7 +40,7 @@ namespace N {
     bool Player::getAlive() const { return Alive; }
 
     // Getter for Skills
-    std::list<std::string> Player::getSkills() const { return Skills; }
+    std::map<std::string, std::pair<int, std::string>> Player::getSkills() const { return Skills; }
 
     // Friend function to output player information
     std::ostream& operator<<(std::ostream& COUT, const Player& player) {
